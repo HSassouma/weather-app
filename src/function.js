@@ -13,8 +13,7 @@ return city
     error.classList.remove("hidden")
     return
   }
-    if(ville){
-     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${ville}&count=5&language=fr&countryCode=MA`
+   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${ville}&count=5&language=fr&countryCode=MA`
      const response=await fetch(url)
      if(!response.ok){
         throw new Error("API Error")
@@ -31,6 +30,6 @@ return city
         longitude:X.longitude
      } 
      return obj 
-    }
+  
    
 }
