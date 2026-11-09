@@ -4,9 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+/>
     <title>weather-app</title>
   </head>
   <body>
+   <header class="flex justify-between items-center  px-[70px]">
+
+  <div class="flex items-center mt-[50px] ">
+    <div class="relative w-[50px] h-10">
+    <i class="fa-solid fa-sun absolute top-0 right-0 text-3xl text-yellow-400"></i>
+    <i class="fa-solid fa-cloud absolute bottom-0 left-0 text-4xl text-white "></i>
+    </div>
+    <h1 class="text-2xl text-white ml-1">WeatherNow</h1>
+  </div>
+
+  <div class="flex items-center gap-2 mt-[50px]">
+    <i class="fa-solid fa-sun text-3xl text-yellow-400 "></i>
+    <p class="text-sm text-white">Real-time weather, worldwide</p>
+  </div>
+</header>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
