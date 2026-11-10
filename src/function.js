@@ -5,7 +5,7 @@ export function valideInput(){
 const city=input.value.trim()
 return city
 }
-
+// get Data city 
 export async function getCity(){
   let ville = valideInput()
   let errorMessage = ""
@@ -17,7 +17,7 @@ export async function getCity(){
     if (!ville) {
       errorMessage = "Please enter a city name"
     } else {
-      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(ville)}&count=5&language=fr&countryCode=MA`
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${ville}&count=5&language=fr&countryCode=MA`
       const response = await fetch(url)
       if (!response.ok) {
         throw new Error("API Error")
@@ -49,6 +49,38 @@ export async function getCity(){
   }
 
   if (errorMessage) {
+    error.textContent = errorMessage
+    error.classList.remove("hidden")
+  }
+}
+
+// get Data weather of city
+
+export async function getWeather(){
+    let errorMessage=""
+    error.classList.add("hidden");
+ try{
+   const city= await getCity()
+
+     if(city){
+         const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7`;
+        const response=await fetch(url)
+         if (!response.ok) {
+        throw new Error("API Error")
+      }
+       const data = await response.json()
+       console.log(data)
+       return data
+     }
+     else{  
+      return 
+     }
+  }
+ catch(err){
+   console.log(err)
+   errorMessage="Unable to get weather data .Please try again"
+}
+ if (errorMessage) {
     error.textContent = errorMessage
     error.classList.remove("hidden")
   }
