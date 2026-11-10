@@ -85,3 +85,9 @@ export async function getWeather(){
     error.classList.remove("hidden")
   }
 }
+
+// afficher les donnees currant
+export async function displayWeather(data){
+  const currant=data.current
+  console.log(currant)
+}
