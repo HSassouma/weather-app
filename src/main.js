@@ -1,5 +1,5 @@
 
-import { getCity, getWeather, displayWeather } from "./function.js"
+import { getCity, getWeather, displayWeather, displayForecast } from "./function.js"
 import "./style.css"
 
 const btn = document.querySelector("#btn")
@@ -9,6 +9,7 @@ const error = document.querySelector("#error")
 async function searchWeather() {
   loading.classList.remove("hidden")
   document.querySelector("#donne_current").classList.add("hidden")
+  document.querySelector("#donnee_dely").classList.add("hidden")
   error.classList.add("hidden")
 
   try {
@@ -19,7 +20,9 @@ async function searchWeather() {
     if (!data) return
 
     loading.classList.add("hidden")
+
     displayWeather(data, city.city)
+    displayForecast(data)
 
   } finally {
     loading.classList.add("hidden")
@@ -27,4 +30,3 @@ async function searchWeather() {
 }
 
 btn.addEventListener("click", searchWeather)
-          

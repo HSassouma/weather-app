@@ -115,3 +115,29 @@ export function displayWeather(data, cityName) {
   wind.textContent = `${current.wind_speed_10m} km/h`
   feels_like.textContent = `${current.apparent_temperature}°C`
 }
+//display dely jours
+
+export function displayForecast(data) {
+  const daily = data.daily
+  const container = document.querySelector("#donnee_dely")
+
+  const day = document.querySelectorAll('[id^="forecast-day-"]')
+  const date = document.querySelectorAll('[id^="forecast-date-"]')
+  const icon = document.querySelectorAll('[id^="forecast-icon-"]')
+  const max = document.querySelectorAll('[id^="forecast-max-"]')
+  const min = document.querySelectorAll('[id^="forecast-min-"]')
+
+  for (let i = 0; i < 7; i++) {
+    const weather = WEATHER_CODES[daily.weather_code[i]]
+
+    const dateObj = new Date(daily.time[i] + "T12:00:00")
+
+    day[i].textContent = dateObj.toLocaleDateString("en-US", { weekday: "long" })
+    date[i].textContent = dateObj.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    icon[i].textContent = weather.icon
+    max[i].textContent = daily.temperature_2m_max[i] + "°C"
+    min[i].textContent = daily.temperature_2m_min[i] + "°C"
+  }
+
+  container.classList.remove("hidden")
+}
