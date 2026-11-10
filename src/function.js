@@ -1,4 +1,4 @@
-import { WEATHER_CODES } from "./icon" 
+import { WEATHER_CODES } from "./icon.js" 
 const input=document.querySelector("#recherche")
 const loading = document.querySelector("#loading")
 const error = document.querySelector("#error")
@@ -57,11 +57,11 @@ export async function getCity(){
 
 // get Data weather of city
 
-export async function getWeather(){
+export async function getWeather(city){
     let errorMessage=""
     error.classList.add("hidden");
  try{
-   const city= await getCity()
+  
 
      if(city){
          const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.latitude}&longitude=${city.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7`;
@@ -88,7 +88,17 @@ export async function getWeather(){
 }
 
 // afficher les donnees currant
-export async function displayWeather(data){
-  const currant=data.current
-  console.log(currant)
+export function displayWeather(data,cityName){
+  const current=data.current
+  const icon_Weather=WEATHER_CODES[current.weather_code]
+  const name_city=document.querySelector("#city-name")
+  const icon_principale=document.querySelector("#weather-icon")
+  const temperatur=document.querySelector("#temperature")
+  const description =document.querySelector("#description")
+  const humidity=document.querySelector("#humidity")
+  const wind=document.querySelector("#wind")
+  const feels_like=document.querySelector("#feels-like")
+  name_city.textContent=`Weather in ${cityName}`
+  icon_principale.textContent=icon_Weather.icon
+  description.textContent=icon_Weather.label
 }
