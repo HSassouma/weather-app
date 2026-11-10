@@ -1,3 +1,4 @@
+import { WEATHER_CODES } from "./icon" 
 const input=document.querySelector("#recherche")
 const loading = document.querySelector("#loading")
 const error = document.querySelector("#error")
