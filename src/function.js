@@ -19,7 +19,7 @@ export async function getCity() {
     if (!ville) {
       errorMessage = "Please enter a city name";
     } else {
-      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(ville)}&count=5&language=fr`;
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(ville)}&count=5&language=fr&countryCode=MA`;
 
       const response = await fetch(url);
 
