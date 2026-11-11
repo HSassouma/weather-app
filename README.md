@@ -1,6 +1,6 @@
-<div align="center">
-
 # 🌤️ WeatherNow
+
+<div align="center">
 
 **Weather for any city, at a glance.**
 
@@ -16,11 +16,11 @@ WeatherNow is a single-page weather app. It converts the city you enter into coo
 
 **Main features**
 
-- Search for a city by name
-- Current temperature, feels-like temperature, humidity, wind speed, and weather condition
-- 7-day forecast with weekday, date, icon, and min/max temperatures
-- Loading and error states for empty input, unknown cities, and failed requests
-- Responsive card layout with a full-screen background image
+- Search for a city by name.
+- Current temperature, feels-like temperature, humidity, wind speed, and weather condition.
+- 7-day forecast with weekday, date, icon, and min/max temperatures.
+- Loading and error states for empty input, unknown cities, and failed requests.
+- Responsive card layout with a full-screen background image.
 
 ## 🧰 Technologies
 
@@ -124,6 +124,23 @@ The API's default units are used: °C for temperature, km/h for wind, and % for 
 5. **Forecast list** — `displayForecast()` loops through the 7 days, maps WMO codes through `WEATHER_CODES` in `src/icon.js`, formats the weekday and date, and shows the min/max temperatures.
 6. **States** — `src/main.js` shows the loading indicator and hides previous results during a new search; errors appear in the inline alert.
 
+## 🧪 Testing & Validation
+
+All implemented test scenarios were manually executed successfully.
+
+| Test Case | Expected Behavior | Result |
+| --- | --- | --- |
+| Empty city input | Displays an error asking the user to enter a city. | ✅ Passed |
+| Unknown city | Displays "City not found". | ✅ Passed |
+| Network/API failure | Displays an error message when a request fails. | ✅ Passed |
+| Valid city search | Retrieves the city's coordinates and weather data. | ✅ Passed |
+| Missing current weather data | Displays an appropriate unavailable-data error. | ✅ Passed |
+| Unknown current weather code | Displays "Unknown weather condition". | ✅ Passed |
+| Unknown forecast weather code | Displays a fallback icon (❓). | ✅ Passed |
+| Successful forecast retrieval | Displays the 7-day forecast with dates and min/max temperatures. | ✅ Passed |
+
+**Test Status:** 8/8 test scenarios passed successfully.
+
 ## 🚀 Installation & Launch
 
 **Requirement:** Node.js with npm.
@@ -147,4 +164,8 @@ npm run preview
 
 ---
 
-<p align="center">Weather data by <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0) · Built with Vite & Tailwind CSS</p>
+<div align="center">
+
+Weather data by [Open-Meteo](https://open-meteo.com/) (CC BY 4.0) · Built with Vite & Tailwind CSS
+
+</div>
