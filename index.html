@@ -5,215 +5,479 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-/>
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
     <title>weather-app</title>
   </head>
-  <body>
-   <header class="flex justify-between items-center  px-[70px]">
-
-  <div class="flex items-center mt-[50px] ">
-    <div class="relative w-[50px] h-10">
-    <i class="fa-solid fa-sun absolute top-0 right-0 text-3xl text-yellow-400"></i>
-    <i class="fa-solid fa-cloud absolute bottom-0 left-0 text-4xl text-white "></i>
-    </div>
-    <h1 class="text-2xl text-white ml-1">WeatherNow</h1>
-  </div>
-
-  <div class="flex items-center gap-2 mt-[50px]">
-    <i class="fa-solid fa-sun text-3xl text-yellow-400 "></i>
-    <p class="text-sm text-white">Real-time weather, worldwide</p>
-  </div>
-</header>
-<section class="mt-16 flex flex-col items-center gap-5">
-  <div class="info">
-    <h1 class="text-5xl font-semibold text-blue-900">Weather Forecast</h1>
-    <p class="text-2xl text-blue-900">Find the weather in your city</p>
-  </div>
-
-  <div class="bg-white text-2xl rounded-4xl w-[500px] flex justify-between items-center p-1">
-    <div class="flex items-center gap-2">
-      <i class="fas fa-search text-blue-950 ml-2"></i>
-      <input
-        type="text"
-        id="recherche"
-        placeholder="Search for a city ..."
-        class="focus:outline-0"
-      />
-    </div>
-
-    <button id="btn" class="bg-blue-700 text-white rounded-4xl px-5 py-2 hover:bg-blue-800">
-      Search
-    </button>
-  </div>
-  <p id="loading" class="hidden text-7xl text-white mt-3.5 bg-blue-700 rounded-4xl p-3 h-32  ">Searching...</p>
-<p id="error" class="hidden text-white bg-red-600 p-2 rounded-3xl text-2xl  mt-2"></p>
-</section>
-
-<main id="donnee_weather" class="max-w-screen-2xl mx-auto px-6 py-8 flex flex-col lg:flex-row items-start gap-6">
-
-  <section id="donne_current"
-    class="hidden bg-white/45 backdrop-blur-md border border-white/60 shadow-xl w-full lg:w-[40%] rounded-3xl p-5 md:p-6">
-    <div class="flex items-center gap-3 mb-8">
-      <i class="fa-solid fa-location-dot text-3xl text-blue-900"></i>
-      <i class="fa-solid fa-cloud-sun text-3xl text-blue-900"></i>
-      <h1 id="city-name" class="text-2xl md:text-3xl font-bold text-blue-950 truncate">
-        Weather in Nador, Morocco
-      </h1>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 items-start">
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-
-        <div id="weather-icon" class="text-5xl md:text-6xl text-yellow-400">
-          <i class="fa-solid fa-cloud-sun"></i>
+  <body class="min-h-screen">
+    <header
+      class="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10"
+    >
+      <div class="flex min-w-0 items-center gap-1.5 sm:gap-2">
+        <div class="relative h-8 w-10 shrink-0 sm:h-10 sm:w-[50px]">
+          <i
+            class="fa-solid fa-sun absolute right-0 top-0 text-2xl text-yellow-400 sm:text-3xl"
+            aria-hidden="true"
+          ></i>
+          <i
+            class="fa-solid fa-cloud absolute bottom-0 left-0 text-3xl text-white sm:text-4xl"
+            aria-hidden="true"
+          ></i>
         </div>
+        <h1 class="truncate text-xl text-white sm:text-2xl">WeatherNow</h1>
+      </div>
 
-        <div class="text-center sm:text-left">
-          <h2 id="temperature" class="text-2xl md:text-7xl font-bold text-blue-950">
-            25°C
-          </h2>
+      <div class="hidden shrink-0 items-center gap-2 sm:flex">
+        <i
+          class="fa-solid fa-sun text-2xl text-yellow-400 lg:text-3xl"
+          aria-hidden="true"
+        ></i>
+        <p class="text-xs text-white lg:text-sm">
+          Real-time weather, worldwide
+        </p>
+      </div>
+    </header>
 
-          <p id="description" class="text-xl font-semibold text-blue-950 mt-3">
-            Partly cloudy
+    <section
+      class="mt-8 flex w-full flex-col items-center gap-4 px-4 sm:mt-12 sm:gap-5 sm:px-6 lg:mt-16 lg:px-8"
+    >
+      <div class="text-center">
+        <h1 class="text-3xl font-semibold text-blue-900 sm:text-4xl lg:text-5xl">
+          Weather Forecast
+        </h1>
+        <p class="mt-2 text-base text-blue-900 sm:text-lg lg:text-2xl">
+          Find the weather in your city
+        </p>
+      </div>
+
+      <div
+        class="flex w-full max-w-[500px] items-center gap-2 rounded-full bg-white p-1.5 pl-4 shadow-sm"
+      >
+        <i
+          class="fas fa-search shrink-0 text-blue-950"
+          aria-hidden="true"
+        ></i>
+        <input
+          type="text"
+          id="recherche"
+          placeholder="Search for a city ..."
+          aria-label="City name"
+          class="w-full min-w-0 bg-transparent py-2 text-base placeholder:text-slate-500 focus:outline-none"
+        />
+        <button
+          id="btn"
+          class="shrink-0 rounded-full bg-blue-700 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-800 sm:px-5 sm:text-base"
+        >
+          Search
+        </button>
+      </div>
+
+      <p
+        id="loading"
+        role="status"
+        class="hidden rounded-full bg-blue-700 px-5 py-2 text-base text-white sm:text-lg"
+      >
+        Searching...
+      </p>
+      <p
+        id="error"
+        role="alert"
+        class="hidden max-w-[500px] rounded-2xl bg-red-600 px-4 py-2 text-center text-sm text-white sm:text-base"
+      ></p>
+    </section>
+
+    <main
+      id="donnee_weather"
+      class="mx-auto flex w-full max-w-7xl flex-col items-stretch gap-6 px-4 py-8 sm:px-6 sm:py-10 lg:gap-8 lg:px-8 xl:flex-row"
+    >
+      <section
+        id="donne_current"
+        class="hidden w-full min-w-0 rounded-3xl border border-white/60 bg-white/45 p-5 shadow-xl backdrop-blur-md sm:p-6 lg:p-8 xl:w-[38%] xl:shrink-0"
+      >
+        <div class="flex h-full flex-col">
+          <div class="mb-6 flex items-center gap-2 sm:mb-8 sm:gap-3">
+            <i
+              class="fa-solid fa-location-dot shrink-0 text-2xl text-blue-900 sm:text-3xl"
+              aria-hidden="true"
+            ></i>
+            <i
+              class="fa-solid fa-cloud-sun shrink-0 text-2xl text-blue-900 sm:text-3xl"
+              aria-hidden="true"
+            ></i>
+            <h1
+              id="city-name"
+              class="min-w-0 break-words text-lg font-bold leading-tight text-blue-950 sm:text-2xl xl:text-3xl"
+            >
+              Weather in Nador, Morocco
+            </h1>
+          </div>
+
+          <div class="flex flex-1 flex-col justify-center gap-6 sm:gap-8">
+            <div class="flex flex-col items-center gap-2 text-center">
+              <div
+                id="weather-icon"
+                class="text-5xl text-yellow-400 sm:text-6xl"
+                aria-hidden="true"
+              >
+                <i class="fa-solid fa-cloud-sun"></i>
+              </div>
+
+              <h2
+                id="temperature"
+                class="text-5xl font-bold leading-none text-blue-950 sm:text-6xl lg:text-7xl"
+              >
+                25°C
+              </h2>
+
+              <p
+                id="description"
+                class="mt-1 text-base font-semibold text-blue-950 sm:text-lg"
+              >
+                Partly cloudy
+              </p>
+            </div>
+
+            <div
+              class="grid grid-cols-3 gap-2 border-t border-blue-300/80 pt-5 sm:gap-4"
+            >
+              <div class="flex flex-col items-center gap-0.5 text-center">
+                <i
+                  class="fa-solid fa-droplet text-xl text-blue-500 sm:text-2xl"
+                  aria-hidden="true"
+                ></i>
+                <p class="mt-1 text-xs text-blue-900 sm:text-sm">Humidity</p>
+                <p id="humidity" class="text-sm font-semibold text-blue-950 sm:text-base">
+                  64%
+                </p>
+              </div>
+
+              <div class="flex flex-col items-center gap-0.5 text-center">
+                <i
+                  class="fa-solid fa-wind text-xl text-blue-600 sm:text-2xl"
+                  aria-hidden="true"
+                ></i>
+                <p class="mt-1 text-xs text-blue-900 sm:text-sm">Wind</p>
+                <p id="wind" class="text-sm font-semibold text-blue-950 sm:text-base">
+                  15 km/h
+                </p>
+              </div>
+
+              <div class="flex flex-col items-center gap-0.5 text-center">
+                <i
+                  class="fa-solid fa-temperature-half text-xl text-blue-600 sm:text-2xl"
+                  aria-hidden="true"
+                ></i>
+                <p class="mt-1 text-xs text-blue-900 sm:text-sm">Feels like</p>
+                <p id="feels-like" class="text-sm font-semibold text-blue-950 sm:text-base">
+                  26.5°C
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="donnee_dely"
+        class="hidden w-full min-w-0 rounded-3xl border border-white/60 bg-white/45 p-4 shadow-xl backdrop-blur-md sm:p-6 lg:p-8 xl:flex-1 xl:p-6"
+      >
+        <div class="mb-4 sm:mb-6">
+          <div class="flex items-center gap-2 sm:gap-3">
+            <i
+              class="fa-solid fa-calendar-days text-lg text-blue-900 sm:text-2xl"
+              aria-hidden="true"
+            ></i>
+            <h2
+              class="text-xl font-bold leading-tight text-blue-950 sm:text-2xl lg:text-3xl"
+            >
+              7-Day Weather Forecast
+            </h2>
+          </div>
+          <p class="mt-1.5 text-sm text-blue-900 sm:text-base">
+            Weather forecast for the upcoming days
           </p>
         </div>
 
-      </div>
-      <div class="border-t md:border-t-0 md:border-l-2 border-blue-300 pt-5 md:pt-0 md:pl-5 space-y-5">
+        <div
+          id="forecast-container"
+          class="flex flex-col gap-2 sm:gap-2.5 md:grid md:grid-cols-2"
+        >
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5 md:col-span-2"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-0"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-0"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-0"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              ☀️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-0"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-0"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
 
-        <div class="flex items-center gap-5">
-          <i class="fa-solid fa-droplet text-3xl text-blue-500"></i>
-          <div>
-            <p class="text-blue-900">Humidity</p>
-            <p id="humidity" class="text-xl font-semibold text-blue-950">64%</p>
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-1"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-1"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-1"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              ☁️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-1"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-1"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-2"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-2"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-2"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              🌤️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-2"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-2"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-3"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-3"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-3"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              🌧️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-3"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-3"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-4"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-4"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-4"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              ⛅
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-4"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-4"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-5"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-5"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-5"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              🌤️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-5"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-5"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 rounded-2xl border border-white/60 bg-white/40 px-3 py-3 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-white/70 hover:shadow-md sm:gap-4 sm:px-4 sm:py-3.5"
+          >
+            <div class="min-w-0">
+              <p
+                id="forecast-day-6"
+                class="truncate text-sm font-semibold text-blue-950 sm:text-base"
+              >
+                Day
+              </p>
+              <p
+                id="forecast-date-6"
+                class="text-xs text-blue-800 sm:text-sm"
+              >
+                Date
+              </p>
+            </div>
+            <div
+              id="forecast-icon-6"
+              class="w-8 text-center text-2xl sm:w-10 sm:text-3xl"
+            >
+              ☀️
+            </div>
+            <div class="flex w-12 flex-col items-end tabular-nums sm:w-14">
+              <p
+                id="forecast-max-6"
+                class="text-base font-bold leading-tight text-blue-950 sm:text-lg"
+              >
+                --°
+              </p>
+              <p
+                id="forecast-min-6"
+                class="text-xs leading-tight text-blue-700 sm:text-sm"
+              >
+                --°
+              </p>
+            </div>
           </div>
         </div>
-
-        <div class="flex items-center gap-5">
-          <i class="fa-solid fa-wind text-3xl text-blue-600"></i>
-          <div>
-            <p class="text-blue-900">Wind</p>
-            <p id="wind" class="text-xl font-semibold text-blue-950">15 km/h</p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-5">
-          <i class="fa-solid fa-temperature-half text-3xl text-blue-600"></i>
-          <div>
-            <p class="text-blue-900">Feels like</p>
-            <p id="feels-like" class="text-xl font-semibold text-blue-950">26.5°C</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
- 
-<section id="donnee_dely" class="hidden bg-white/45 backdrop-blur-md border border-white/60 shadow-xl w-full lg:w-[60%] rounded-3xl p-8 md:p-10">
-
-
-  <div class="mb-8">
-    <h2 class="text-2xl md:text-3xl font-bold text-blue-950">
-      <i class="fa-solid fa-calendar-days text-blue-900 mr-3"></i>7-Day Weather Forecast
-    </h2>
-    <p class="text-blue-900 mt-2">
-      Weather forecast for the upcoming days
-    </p>
-  </div>
-
-  <div id="forecast-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-0" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-0" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-0" class="text-4xl">☀️</div>
-      <div class="text-center">
-        <p id="forecast-max-0" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-0" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-1" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-1" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-1" class="text-4xl">☁️</div>
-      <div class="text-center">
-        <p id="forecast-max-1" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-1" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-2" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-2" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-2" class="text-4xl">🌤️</div>
-      <div class="text-center">
-        <p id="forecast-max-2" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-2" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-3" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-3" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-3" class="text-4xl">🌧️</div>
-      <div class="text-center">
-        <p id="forecast-max-3" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-3" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-4" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-4" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-4" class="text-4xl">⛅</div>
-      <div class="text-center">
-        <p id="forecast-max-4" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-4" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-5" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-5" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-5" class="text-4xl">🌤️</div>
-      <div class="text-center">
-        <p id="forecast-max-5" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-5" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-    <div class="bg-white/40 border border-white/60 rounded-2xl p-4 flex flex-col items-center gap-4">
-      <div class="text-center">
-        <p id="forecast-day-6" class="font-bold text-blue-950">Day</p>
-        <p id="forecast-date-6" class="text-sm text-blue-800">Date</p>
-      </div>
-      <div id="forecast-icon-6" class="text-4xl">☀️</div>
-      <div class="text-center">
-        <p id="forecast-max-6" class="text-xl font-bold text-blue-950">--°</p>
-        <p id="forecast-min-6" class="text-sm text-blue-700">--°</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-</main>
+      </section>
+    </main>
 
     <script type="module" src="/src/main.js"></script>
   </body>
